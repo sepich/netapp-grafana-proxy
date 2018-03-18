@@ -1,0 +1,18 @@
+version: '3'
+services:
+
+  proxy:
+    image: napp-proxy
+    build:
+      context: .
+    environment:
+      PORT: '8080'
+      SECRET: /run/secrets/napp.json
+    volumes:
+      - ./napp.json:/run/secrets/napp.json
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "80:3000"
+
