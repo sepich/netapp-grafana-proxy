@@ -62,7 +62,7 @@ class HTTPHandler(BaseHTTPRequestHandler):
                     req = urllib2.Request(url=to, headers={"Authorization": "Bearer " + token})
                     resp = urllib2.urlopen(req)
                     code = resp.getcode()
-                    if code == 403:
+                    if code in [401, 403]:
                         token = ''
                     else:
                         break
