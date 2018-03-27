@@ -60,12 +60,15 @@ class HTTPHandler(BaseHTTPRequestHandler):
                     if not token:
                         token = get_token(config)
                     req = urllib2.Request(url=to, headers={"Authorization": "Bearer " + token})
-                    resp = urllib2.urlopen(req)
-                    code = resp.getcode()
-                    if code in [401, 403]:
-                        token = ''
-                    else:
+                    try:
+                        resp = urllib2.urlopen(req)
+                        code = resp.getcode()
                         break
+                    except urllib2.HTTPError as e:
+                        if e.code in [401, 403]:
+                            token = ''
+                        else:
+                            raise e
 
                 self.send_response(code)
                 for header in resp.info().headers:
