@@ -7,6 +7,8 @@ But this endpoint is incompatible for direct use by Grafana, because of Token re
 
 This proxy fixes incompatibilities and allows to have Grafana dashboards for data inside StorageGRID.
 
+Note: Turns out Grafana already exists on Admin node, but blocked by firewall. So, you could either allow port 3000 and use internal NetApp grafana, or use this proxy - if you have no root access to NetApp.
+
 ### Quick start
 You can use proxy.py directly, or there is docker-compose example with grafana provided for quick check.
 
